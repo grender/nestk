@@ -174,12 +174,15 @@ void BodyEventDetector :: initialize(xn::Context& context, xn::DepthGenerator& d
     m_push_detector = new XnVPushDetector;
     m_push_detector->RegisterPush(this, &BodyEventDetectorPush_Pushed);
     // FIXME: using custom detector. m_session_manager->AddListener(m_push_detector);
-
+    m_session_manager->AddListener(m_push_detector);
+/*
     m_wave_detector = new XnVWaveDetector;
     m_wave_detector->SetFlipCount(5);
     m_wave_detector->RegisterWave(this, &BodyEventDetectorWave_Waved);
     m_session_manager->AddListener(m_wave_detector);
-
+*/
+  
+/*
     m_steady_detector = new XnVSteadyDetector;
     m_steady_detector->RegisterSteady(this, &BodyEventDetectorSteady_Steady);
     // FIXME: this should be accessible from Lua.
@@ -191,7 +194,7 @@ void BodyEventDetector :: initialize(xn::Context& context, xn::DepthGenerator& d
     m_circle_detector = new XnVCircleDetector;
     m_circle_detector->RegisterCircle(this, &BodyEventDetectorCircle_Circle);
     m_session_manager->AddListener(m_circle_detector);
-
+*/
     m_swipe_detector = new XnVSwipeDetector(true);
 
 /*My patch BEGIN   */
@@ -200,15 +203,15 @@ void BodyEventDetector :: initialize(xn::Context& context, xn::DepthGenerator& d
     m_swipe_detector->SetSteadyMaxVelocity(0.1);
     m_swipe_detector->SetMotionSpeedThreshold(1);
 /*My patch END     */
-    m_swipe_detector->RegisterSwipeUp(this, &BodyEventDetectorSwipe_SwipeUp);
-    m_swipe_detector->RegisterSwipeDown(this, &BodyEventDetectorSwipe_SwipeDown);
+//    m_swipe_detector->RegisterSwipeUp(this, &BodyEventDetectorSwipe_SwipeUp);
+//    m_swipe_detector->RegisterSwipeDown(this, &BodyEventDetectorSwipe_SwipeDown);
     m_swipe_detector->RegisterSwipeLeft(this, &BodyEventDetectorSwipe_SwipeLeft);
     m_swipe_detector->RegisterSwipeRight(this, &BodyEventDetectorSwipe_SwipeRight);
     
     
     
     // FIXME: disabled, using custom detector.
-    // m_session_manager->AddListener(m_swipe_detector);
+    m_session_manager->AddListener(m_swipe_detector);
 
     if (m_pointer_smoothing_type != POINTER_SMOOTHING_DISABLED)
     {
