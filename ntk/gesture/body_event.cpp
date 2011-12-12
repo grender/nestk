@@ -193,10 +193,20 @@ void BodyEventDetector :: initialize(xn::Context& context, xn::DepthGenerator& d
     m_session_manager->AddListener(m_circle_detector);
 
     m_swipe_detector = new XnVSwipeDetector(true);
+
+/*My patch BEGIN   */
+    //    m_swipe_detector->SetMotionTime(350);
+    //    m_swipe_detector->SetSteadyDuration(500);
+    m_swipe_detector->SetSteadyMaxVelocity(0.1);
+    m_swipe_detector->SetMotionSpeedThreshold(1);
+/*My patch END     */
     m_swipe_detector->RegisterSwipeUp(this, &BodyEventDetectorSwipe_SwipeUp);
     m_swipe_detector->RegisterSwipeDown(this, &BodyEventDetectorSwipe_SwipeDown);
     m_swipe_detector->RegisterSwipeLeft(this, &BodyEventDetectorSwipe_SwipeLeft);
     m_swipe_detector->RegisterSwipeRight(this, &BodyEventDetectorSwipe_SwipeRight);
+    
+    
+    
     // FIXME: disabled, using custom detector.
     // m_session_manager->AddListener(m_swipe_detector);
 
